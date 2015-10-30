@@ -35,15 +35,15 @@ func NewDeck() Deck {
 
 // Shuffles the cards inside the Deck
 func (d *Deck) Shuffle() {
-    for i := range d {
+    for i := range *d {
         j := rand.Intn(i + 1)
-        d[i], d[j] = d[j], d[i]
+        (*d)[i], (*d)[j] = (*d)[j], (*d)[i]
     }
 }
 
 // Returns a pointer to the card on the top of the Deck, "removing" it from the Deck
 func (deck *Deck) Deal() *Card {
-    card := *deck[len(*deck) - 1]
-    *deck = *deck[:len(*deck) - 1]
+    card := (*deck)[len(*deck) - 1]
+    *deck = (*deck)[:len(*deck) - 1]
     return &card
 }

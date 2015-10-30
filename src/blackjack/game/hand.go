@@ -7,7 +7,7 @@ func (hand *Hand) Score() int {
     score := 0
 
     for _, card := range *hand {
-        score += &card.Score()
+        score += card.Score()
     }
 
     return score
@@ -18,6 +18,6 @@ func NewHand() Hand {
     return make([]Card, 2)
 }
 
-func (hand *Hand) addToHand(card *Card) {
-    append(*hand, *card)
-}
+//func (hand *Hand) addToHand(card *Card) {
+//    append(*hand, *card)
+//}
