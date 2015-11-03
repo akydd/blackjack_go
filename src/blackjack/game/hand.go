@@ -1,6 +1,6 @@
 package game
 
-type Hand []Card
+type Hand []*Card
 
 // Return the total score for the Hand
 func (hand *Hand) Score() int {
@@ -15,9 +15,10 @@ func (hand *Hand) Score() int {
 
 // Create an empty Hand
 func NewHand() Hand {
-    return make([]Card, 2)
+    return make([]*Card, 0, 2)
 }
 
-//func (hand *Hand) addToHand(card *Card) {
-//    append(*hand, *card)
-//}
+// Add a *Card to the Hand
+func (hand *Hand) addCard(card *Card) {
+    *hand = append(*hand, card)
+}

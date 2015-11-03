@@ -32,15 +32,37 @@ func TestDeck(t *testing.T) {
 
 func TestDeck_Deal(t *testing.T) {
     deck := NewDeck();
-    lastCard := deck[len(deck) - 1]
+    topCard := deck[len(deck) - 1]
     dealtCard := (&deck).Deal()
-    newLastCard := deck[len(deck) - 1]
+    newTopCard := deck[len(deck) - 1]
     
-    if reflect.DeepEqual(lastCard, newLastCard) {
+    if reflect.DeepEqual(topCard, newTopCard) {
         t.Error("The card on the top of the Deck should have changed")
     }
     
-    if !reflect.DeepEqual(lastCard, *dealtCard) {
+    if !reflect.DeepEqual(topCard, *dealtCard) {
         t.Error("The top card should also be the dealt card")
+    }
+
+    if len(deck) != 51 {
+        t.Error("The size of the remaining Deck should have decreased by 1")
+    }
+}
+
+func TestDeck_Reset(t *testing.T) {
+    deck := NewDeck();
+    topCard := (&deck).Deal()
+    (&deck).Deal()
+    (&deck).Deal()
+
+    (&deck).Reset()
+    newTopCard := deck[51]
+
+    if len(deck) != 52 {
+        t.Error("Expected the deck to have all 52 cards again")
+    }
+
+    if !reflect.DeepEqual(topCard, newTopCard) {
+        t.Error("Expected the top card to be restored after resetting the deck")
     }
 }

@@ -47,3 +47,8 @@ func (deck *Deck) Deal() *Card {
     *deck = (*deck)[:len(*deck) - 1]
     return &card
 }
+
+// Restore all cards to the Deck
+func (deck *Deck) Reset() {
+    *deck = (*deck)[:cap(*deck)]
+}
