@@ -19,7 +19,7 @@ func TestHand_addCard(t *testing.T) {
 	card1 := Card{"A", "c"}
 	card2 := Card{"3", "s"}
 
-	(&hand).addCard(&card1);
+	(&hand).AddCard(&card1);
 	firstCard := hand[0]
 
 	if len(hand) != 1 {
@@ -34,7 +34,7 @@ func TestHand_addCard(t *testing.T) {
 		t.Error("Expected the first card suite to be Clubs")
 	}
 
-	(&hand).addCard(&card2)
+	(&hand).AddCard(&card2)
 	secondCard := hand[1]
 
 	if len(hand) != 1 {
@@ -60,8 +60,8 @@ func TestHand_Score(t *testing.T) {
 	card1 := Card{"A", "c"}
 	card2 := Card{"3", "s"}
 
-	(&hand).addCard(&card1)
-	(&hand).addCard(&card2)
+	(&hand).AddCard(&card1)
+	(&hand).AddCard(&card2)
 
 	if (&hand).Score() != 14 {
 		t.Error("expected the hand [Ac, 3s] to have a score of 14")

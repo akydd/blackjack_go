@@ -19,6 +19,6 @@ func NewHand() Hand {
 }
 
 // Add a *Card to the Hand
-func (hand *Hand) addCard(card *Card) {
+func (hand *Hand) AddCard(card *Card) {
     *hand = append(*hand, card)
 }
