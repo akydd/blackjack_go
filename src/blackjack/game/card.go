@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Card represents a single standard playing card
 type Card struct {
 	rank  string
 	suite string

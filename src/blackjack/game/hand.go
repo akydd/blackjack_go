@@ -1,13 +1,14 @@
 package game
 
+// Hand represents a players hand of cards
 type Hand []*Card
 
-// Create an empty Hand
+// NewHand creates an empty Hand and returns it
 func NewHand() Hand {
 	return make([]*Card, 0, 2)
 }
 
-// Return the total score for the Hand
+// Score calculates and returns the total score for the Hand
 func (hand *Hand) Score() int {
 	score := 0
 
@@ -18,7 +19,7 @@ func (hand *Hand) Score() int {
 	return score
 }
 
-// Add a *Card to the Hand
+// AddCard adds a *Card to the Hand
 func (hand *Hand) AddCard(card *Card) {
 	*hand = append(*hand, card)
 }

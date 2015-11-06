@@ -4,6 +4,7 @@ import (
 	"math/rand"
 )
 
+// Deck represents a single deck of playing cards, minus the Jokers.
 type Deck []Card
 
 var cards = []Card{
@@ -25,29 +26,29 @@ var cards = []Card{
 	Card{"K", "s"},
 }
 
-// Return a new Deck.  Each Deck contains a private copy of the cards.
+// NewDeck returns a new un-shuffled Deck.  Each Deck contains a private copy of the cards.
 func NewDeck() Deck {
 	deck := make([]Card, 52)
 	copy(deck, cards)
 	return deck
 }
 
-// Shuffles the cards inside the Deck
-func (d *Deck) Shuffle() {
-	for i := range *d {
+// Shuffle randomly reorders the cards inside the Deck
+func (deck *Deck) Shuffle() {
+	for i := range *deck {
 		j := rand.Intn(i + 1)
-		(*d)[i], (*d)[j] = (*d)[j], (*d)[i]
+		(*deck)[i], (*deck)[j] = (*deck)[j], (*deck)[i]
 	}
 }
 
-// Returns a pointer to the card on the top of the Deck, "removing" it from the Deck
+// Deal "removes" the top card from the Deck and returns a pointer to that card
 func (deck *Deck) Deal() *Card {
 	card := (*deck)[len(*deck)-1]
 	*deck = (*deck)[:len(*deck)-1]
 	return &card
 }
 
-// Restore all cards to the Deck
+// Reset restores all cards to the Deck, but does not re/order them
 func (deck *Deck) Reset() {
 	*deck = (*deck)[:cap(*deck)]
 }
