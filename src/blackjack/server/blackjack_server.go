@@ -11,6 +11,20 @@ var deck = game.NewDeck()
 var playerHand, dealerHand game.Hand
 var gameState = "NOT_RUNNING"
 
+const greetingText = "** BLACKJACK! **\n\n" +
+	"Rules:\n" +
+	" - Single player\n" +
+	" - No betting\n" +
+	" - Aces are always worth 11\n\n" +
+	"Instructions:\n" +
+	" - '/start' starts a new game.  Once a game is started, it must be completed\n" +
+	" - '/hit' to hit\n" +
+	" - '/stand' to stand\n"
+
+func greeting(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, greetingText)
+}
+
 func start(w http.ResponseWriter, r *http.Request) {
 	if gameState == "RUNNING" {
 		fmt.Fprintf(w, "Game already in progress!\n\n")
@@ -91,27 +105,14 @@ func stand(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	greeting()
+	fmt.Println("Running on port 8080...")
+	fmt.Println("")
+	fmt.Println(greetingText)
 
+	http.HandleFunc("/", greeting)
 	http.HandleFunc("/start", start)
 	http.HandleFunc("/hit", hit)
 	http.HandleFunc("/stand", stand)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-func greeting() {
-	fmt.Println("Running on port 8080...")
-	fmt.Println("")
-	fmt.Println("** BLACKJACK! **")
-	fmt.Println("")
-	fmt.Println("Rules:")
-	fmt.Println(" - Single player")
-	fmt.Println(" - No betting")
-	fmt.Println(" - Aces are always worth 11")
-	fmt.Println("")
-	fmt.Println("Instructions:")
-	fmt.Println(" - '/start' starts a new game.  Once a game is started, it must be completed")
-	fmt.Println(" - '/hit' to hit")
-	fmt.Println(" - '/stand' to stand")
 }
